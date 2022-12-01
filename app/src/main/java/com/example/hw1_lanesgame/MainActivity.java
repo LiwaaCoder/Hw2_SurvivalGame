@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity
     final int DELAY = 1000;
     private final int duration = Toast.LENGTH_SHORT;
     GameManager gameManager;
-    private int index = 0;
+    private int place = 0;
     private MaterialButton main_BTN_left;
     private MaterialButton main_BTN_right;
     private ShapeableImageView[] main_IMG_hearts;
@@ -114,22 +114,6 @@ public class MainActivity extends AppCompatActivity
         gameManager.setCar_location(1);
     }
 
-
-
-    private void update()
-    {
-        for (int i = 0; i < gameManager.ROWS; i++) {
-            for (int j = 0; j < gameManager.COLS; j++) {
-                if(gameManager.visible_stones[i][j] == 0)
-                    main_IMG_rocks[i][j].setVisibility(View.INVISIBLE);
-                else
-                    main_IMG_rocks[i][j].setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-
-
     private void StonesView()
     {
 
@@ -190,10 +174,13 @@ public class MainActivity extends AppCompatActivity
     }
     private void stopTimer() {
         handler.removeCallbacks(runnable);
-    }    private void UpdateStonesView()
+    }
+    private void UpdateStonesView()
     {
-        for (int i = 0; i < gameManager.COLS; i++){
-            for(int j = 0; j < gameManager.ROWS; j++){
+        for (int i = 0; i < gameManager.COLS; i++)
+        {
+            for(int j = 0; j < gameManager.ROWS; j++)
+            {
                 if (gameManager.visible_stones[j][i] == 1)
                 {
                     if(j != gameManager.ROWS-1)
@@ -218,19 +205,41 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         }
-        index++;
-        if(index == 3)
+        placing();
+        update();
+    }
+    private void placing()
+    {
+        place++;
+        if(place == 2)
         {
             gameManager.getStone();
-            index = 0;
-            update();
+            place = 0;
+            //update();
         }
-        update();
-    }Runnable runnable = new Runnable() {
-        public void run() {
+    }Runnable runnable = new Runnable()
+{
+        public void run()
+        {
             handler.postDelayed(this, DELAY);
             UpdateStonesView();
         }
     };
+
+    private void update()
+    {
+        for (int i = 0; i < gameManager.ROWS; i++) {
+            for (int j = 0; j < gameManager.COLS; j++) {
+                if(gameManager.visible_stones[i][j] == 0)
+                    main_IMG_rocks[i][j].setVisibility(View.INVISIBLE);
+                else
+                    main_IMG_rocks[i][j].setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+
+
+
 
 }
