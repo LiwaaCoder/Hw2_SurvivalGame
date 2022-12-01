@@ -56,11 +56,34 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void showToast(String string)
+    private void initViews()
     {
-        Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, string, duration);
-        toast.show();
+        main_BTN_left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clicked(true);
+            }
+        });
+
+        main_BTN_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clicked(false);
+            }
+        });
+        startTimer();
+    }
+
+
+    private void clicked(boolean answer)
+    {
+        gameManager.setCar(answer, gameManager.getCar_location());
+        main_IMG_cars[gameManager.getCar_location()].setVisibility(View.VISIBLE);
+        for (int i = 0; i < main_IMG_cars.length; i++)
+        {
+            if(i != gameManager.getCar_location())
+                main_IMG_cars[i].setVisibility(View.INVISIBLE);
+        }
     }
 
     private void findViews() {
@@ -120,37 +143,18 @@ public class MainActivity extends AppCompatActivity
                         findViewById(R.id.game_IMG_stoneC15)}
 
         };
-        //gameManager.getStone();
+        gameManager.getStone();
         update();
     }
 
-    private void initViews()
-    {
-        main_BTN_left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clicked(true);
-            }
-        });
 
-        main_BTN_right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clicked(false);
-            }
-        });
-        startTimer();
-    }
-    private void clicked(boolean answer)
+    private void showToast(String string)
     {
-        gameManager.setCar(answer, gameManager.getCar_location());
-        main_IMG_cars[gameManager.getCar_location()].setVisibility(View.VISIBLE);
-        for (int i = 0; i < main_IMG_cars.length; i++)
-        {
-            if(i != gameManager.getCar_location())
-                main_IMG_cars[i].setVisibility(View.INVISIBLE);
-        }
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, string, duration);
+        toast.show();
     }
+
 
     private void startTimer() {
         handler.postDelayed(runnable, DELAY);
@@ -164,6 +168,8 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
+
+
     private void vibrate()
     {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -171,7 +177,6 @@ public class MainActivity extends AppCompatActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
-            //deprecated in API 26
             v.vibrate(500);
         }
     }
@@ -222,8 +227,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
-
 
 
 
