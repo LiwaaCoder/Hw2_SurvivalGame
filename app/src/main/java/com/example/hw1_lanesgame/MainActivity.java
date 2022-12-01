@@ -161,39 +161,21 @@ public class MainActivity extends AppCompatActivity
     }
     private void stopTimer() {
         handler.removeCallbacks(runnable);
-    }Runnable runnable = new Runnable() {
-        public void run() {
-            handler.postDelayed(this, DELAY);
-            updateRocksView();
-        }
-    };
-
-
-
-    private void vibrate()
-    {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(500);
-        }
-    }
-
-    private void updateRocksView()
+    }    private void UpdateStonesView()
     {
         for (int i = 0; i < gameManager.COLS; i++){
             for(int j = 0; j < gameManager.ROWS; j++){
                 if (gameManager.visible_stones[j][i] == 1)
                 {
-                    if(j != gameManager.ROWS-1){
+                    if(j != gameManager.ROWS-1)
+                    {
                         gameManager.setActiveRocks(j, i, 0);
                         gameManager.setActiveRocks(j+1, i, 1);
                         if (i != gameManager.COLS-1)
                             i++;
                     }
-                    else {
+                    else
+                    {
                         gameManager.setActiveRocks(j, i, 0);
                         if (gameManager.IsAccident(i) == 1)
                         {
@@ -212,9 +194,28 @@ public class MainActivity extends AppCompatActivity
         {
             gameManager.getStone();
             index = 0;
+            update();
         }
         update();
+    }Runnable runnable = new Runnable() {
+        public void run() {
+            handler.postDelayed(this, DELAY);
+            UpdateStonesView();
+        }
+    };
+
+    private void vibrate()
+    {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(500);
+        }
     }
+
+
 
     private void update()
     {
