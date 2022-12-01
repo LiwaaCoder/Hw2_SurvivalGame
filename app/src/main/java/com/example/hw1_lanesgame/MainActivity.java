@@ -114,6 +114,22 @@ public class MainActivity extends AppCompatActivity
         gameManager.setCar_location(1);
     }
 
+
+
+    private void update()
+    {
+        for (int i = 0; i < gameManager.ROWS; i++) {
+            for (int j = 0; j < gameManager.COLS; j++) {
+                if(gameManager.visible_stones[i][j] == 0)
+                    main_IMG_rocks[i][j].setVisibility(View.INVISIBLE);
+                else
+                    main_IMG_rocks[i][j].setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+
+
     private void StonesView()
     {
 
@@ -145,6 +161,19 @@ public class MainActivity extends AppCompatActivity
         };
         gameManager.getStone();
         update();
+    }
+
+
+
+    private void vibrate()
+    {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        // Vibrate for 500 milliseconds
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(500);
+        }
     }
 
 
@@ -203,32 +232,5 @@ public class MainActivity extends AppCompatActivity
             UpdateStonesView();
         }
     };
-
-    private void vibrate()
-    {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(500);
-        }
-    }
-
-
-
-    private void update()
-    {
-        for (int i = 0; i < gameManager.ROWS; i++) {
-            for (int j = 0; j < gameManager.COLS; j++) {
-                if(gameManager.visible_stones[i][j] == 0)
-                    main_IMG_rocks[i][j].setVisibility(View.INVISIBLE);
-                else
-                    main_IMG_rocks[i][j].setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-
 
 }
