@@ -38,10 +38,11 @@ public class MainActivity extends AppCompatActivity
     private moveDecoretor moveDecoretor;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        GameUtils.hideSystemUI(this);
         Intent previousIntent = getIntent();
         status = previousIntent.getExtras().getString(KEY_STATUS);
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
         }
         findViews();
         initViews();
+
     }
 
     private moveDecoretor.CallBack_moves callBack_moves = new moveDecoretor.CallBack_moves() {
@@ -85,14 +87,20 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-    private void openScorePage() {
-        Intent intent = new Intent(this, Score_map_activity.class);
+    private void openScorePage()
+    {
+        Intent intent = new Intent(this, Activity_TOP10.class);
         startActivity(intent);
-        finish();
+        Intent gameOverIntent = new Intent(MainActivity.this, Activity_after_game.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", score);
+        gameOverIntent.putExtras(bundle);
+        startActivity(gameOverIntent);
     }
 
     private void refreshUI() {
-        if (gameManager.isLose()) {
+        if (gameManager.isLose())
+        {
             stopTimer();
             openScorePage();
         } else {
@@ -277,6 +285,7 @@ public class MainActivity extends AppCompatActivity
                     else {
                         gameManager.setActiveRocks(j, i, 0);
                         score += gameManager.checkCoins(i);
+                        showToast("Nice Move ");
 
                         refreshUI();
                     }

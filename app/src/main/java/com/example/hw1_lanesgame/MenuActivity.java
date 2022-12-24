@@ -2,10 +2,13 @@ package com.example.hw1_lanesgame;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +32,7 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         findViews();
         initViews();
+        clicked();
     }
 
     private void findViews()
@@ -37,6 +41,7 @@ public class MenuActivity extends AppCompatActivity
         main_BTN_score = findViewById(R.id.main_btn_score);
         main_BTN_sensors = findViewById(R.id.main_BTN_sensor);
         main_BTN_buttons = findViewById(R.id.main_BTN_button);
+
     }
 
     private void initViews() {
@@ -47,31 +52,40 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
-        main_BTN_score.setOnClickListener(new View.OnClickListener() {
+        main_BTN_score.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 openScorePage();
             }
         });
+
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void openScorePage()
     {
-        Intent intent = new Intent(this, Score_map_activity.class);
+        Intent intent = new Intent(this, Activity_TOP10.class);
         startActivity(intent);
-        finish();
     }
 
-    private void openGamePage(String chose) {
+    private void openGamePage(String chose)
+    {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(MainActivity.KEY_STATUS,chose);
         startActivity(intent);
-        finish();
     }
 
     private void clicked(){
         main_BTN_buttons.setVisibility(View.VISIBLE);
         main_BTN_sensors.setVisibility(View.VISIBLE);
+        main_BTN_score.setOnClickListener(view -> openScorePage());
         initNextViews();
     }
 
@@ -92,7 +106,12 @@ public class MenuActivity extends AppCompatActivity
                 openGamePage("false");
             }
         });
+
+
     }
+
+
+
 
     private void showToast(String string)
     {
