@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@drawable/ic_back_cars"
+
+    android:gravity="center">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"    />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:text="The Car Survival"
+        android:textColor="#3F51B5"
+        android:textSize="42sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/car"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginRight="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="247dp"
+                android:layout_height="53dp"
+                android:layout_alignParentStart="true"
+                android:text="Choose Game Mode"
+                android:textAlignment="center"
+                android:textColor="#E64A19"
+                android:background="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:id="@+id/rBtnModeOptions"
+                android:layout_width="168dp"
+                android:layout_height="141dp"
+                android:layout_below="@+id/txtModeTitle"
+                android:layout_gravity="center_horizontal"
+                android:checkedButton="@id/main_BTN_sensor">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/main_BTN_sensor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text="Sensor Mode"
+                    android:textColor="#E64A19"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/main_BTN_button"
+                    style="@style/Base.CardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@id/main_BTN_sensor"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+
+                    android:background="@color/white"
+                    android:text="Button Mode"
+                    android:textColor="#E64A19"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/main_btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start The Game"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
+        />
+
+    <Button
+        android:id="@+id/main_btn_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Top 10"
+        android:textSize="28sp"
+        android:textColor="@android:color/white"
+        />
+
+</LinearLayout>
+
+
+
+
+
+

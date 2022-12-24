@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Score_map_activity"
+    android:padding="32dp"
+    android:orientation="vertical"
+    android:background="@drawable/ic_back_cars">
+
+
+    <FrameLayout
+        android:id="@+id/score_LAY_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="32dp"
+        android:background="#388E3C"/>
+
+    <FrameLayout
+        android:id="@+id/score_LAY_map"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:background="#0288D1"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/score_BTN_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Go to start"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

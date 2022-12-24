@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Score_map_activity"
+    android:background="@drawable/ic_back_cars"
+    >
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_LBL_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Score list"
+        android:backgroundTint="@color/white"
+        android:textSize="50sp"
+        android:textColor="@color/material_dynamic_primary100"
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/fragmentList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:divider="#E64A19"
+        android:dividerHeight="1dp"
+        android:backgroundTintMode="screen"
+        android:backgroundTint="@color/white"
+
+        />
+
+
+
+</RelativeLayout>
